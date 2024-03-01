@@ -8,3 +8,4 @@ To calculate the AAscore, a reaction prediction model (T5Chem) and rxnmapper are
 - https://github.com/HelloJocelynLu/t5chem
 - https://github.com/rxn4chemistry/rxnmapper
 
+## Usage
