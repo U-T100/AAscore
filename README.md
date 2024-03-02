@@ -9,7 +9,7 @@ To calculate the AAscore, a reaction prediction model (T5Chem) and rxnmapper are
 - https://github.com/rxn4chemistry/rxnmapper
 
 ## Usage
-Please adjust the arguments of the calculate_AAscore function in AAscore.py to suit your situation appropriately. You don't need to change the other arguments.
+Please adjust the arguments of the calculate_AAscore function in AAscore.py to suit your situation appropriately. You don't need to change the other arguments. **Please use aromatic (not kekule) SMILES that have been canonicalized with RDKit for compound data.**
 ~~~python
 input_cpd       = 'COC1=CC=C(CNC(=O)[C@H]2CC(=O)N(C3=CC=C(S(N)(=O)=O)C=C3)[C@@H]2C2=CC=C(Cl)C=C2)C=C1' # Target compound for calculating AAscore
 model_path      = 'path/to/your/model/' # Reaction prediction model (T5Chem) path
