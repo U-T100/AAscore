@@ -9,3 +9,13 @@ To calculate the AAscore, a reaction prediction model (T5Chem) and rxnmapper are
 - https://github.com/rxn4chemistry/rxnmapper
 
 ## Usage
+Please adjust the arguments of the calculate_AAscore function in AAscore.py to suit your situation appropriately. You don't need to change the other arguments.
+~~~python
+input_cpd       = 'COC1=CC=C(CNC(=O)[C@H]2CC(=O)N(C3=CC=C(S(N)(=O)=O)C=C3)[C@@H]2C2=CC=C(Cl)C=C2)C=C1' # Target compound for calculating AAscore
+model_path      = 'path/to/your/model/' # Reaction prediction model (T5Chem) path
+cpds_data_path  = 'path/to/your/compound_data.tsv' # You can use any compound data for searching candidate reactants
+cpds_columnname = 'compounds' # compounds column name in compound data
+save_path       = 'path/to/save_directory/generated_analogs.tsv'
+extracted_data  = pd.read_table(cpds_data_path)
+caluculate_AAscore(input_cpd, model_path, extracted_data, cpds_columnname, used_reactants_num=7, save_analogs=True, save_path=save_path)
+~~~
