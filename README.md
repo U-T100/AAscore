@@ -19,3 +19,6 @@ save_path       = 'path/to/save_directory/generated_analogs.tsv'
 extracted_data  = pd.read_table(cpds_data_path)
 caluculate_AAscore(input_cpd, model_path, extracted_data, cpds_columnname, used_reactants_num=7, save_analogs=True, save_path=save_path)
 ~~~
+
+## Reference
+Takato Ue and Tomoyuki Miyao., Analog Accessibility Score (AAscore) for Rational Compound Selection, URL_to_paper
