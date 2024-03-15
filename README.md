@@ -5,8 +5,8 @@ The Analog Accessibility score (AAscore) is a score that represents the accessib
 
 ## Installation
 To calculate the AAscore, a reaction prediction model (T5Chem) and rxnmapper are required. You can use AAscore_env.yml for setting up the environment, but if it doesn't work, please install the necessary libraries from the following link. If installing these via pip, Python 3.7 is highly recommended.
-- https://github.com/HelloJocelynLu/t5chem
-- https://github.com/rxn4chemistry/rxnmapper
+- [T5Chem](https://github.com/HelloJocelynLu/t5chem)
+- [RXNMapper](https://github.com/rxn4chemistry/rxnmapper)
 
 ## Usage
 Please adjust the arguments of the calculate_AAscore function in AAscore.py to suit your situation appropriately. You don't need to change the other arguments. **Please use aromatic (not kekule) SMILES that have been canonicalized with RDKit for compound data.**
