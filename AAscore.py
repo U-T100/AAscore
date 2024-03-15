@@ -159,7 +159,7 @@ def predicted_reactants_curation(canon_cpd, predicted_reactants):
     predicted_reactants = [reactants for reactants in predicted_reactants if all(Chem.GetFormalCharge(Chem.MolFromSmiles(reactant)) == 0 for reactant in reactants.split('.'))]
     return predicted_reactants
 
-def extract_candidate_reactants_from_cpds(extracted_data, cpds_columnname, smallest_reactant_with_rc, only_rc=False, only_similarity=False, rc_and_similarity=True, similarity_threshold=0.4, match_rc_num_in_reactant=True, narrow_down_database=True):
+def extract_candidate_reactants_from_cpds(extracted_data, cpds_columnname, smallest_reactant_with_rc, only_rc=False, only_similarity=False, rc_and_similarity=True, similarity_threshold=0.4, match_rc_num_in_reactant=True, narrow_down_database=True, canonicalize_cpds=True):
     '''This function retrieves compounds with all reaction center of the reactant under consideration.
     RC = Reaction Center
     RR = Replaced Reactant (smallest predicted reactant)
@@ -170,13 +170,21 @@ def extract_candidate_reactants_from_cpds(extracted_data, cpds_columnname, small
     similarity_threshold : The similarity between the RR and the CR must be greater than or equal to this value.
     match_rc_num_in_reactant : If True, the number of reaction centers in the RR and the number of reaction centers in the candidate reactant must be the same.
     narrow_down_database : If True, narrow down the compound database to be searched by the number of heavy atoms of the RR. When the size of the compound database is large, it can significantly reduce the time required.
+    canonicalize_cpds : If True, convert the SMILES of the compound database to canonical SMILES (aromatic) with rdkit. 
     ex result = [{'reacA': ['rr1', 'rr2'], 'reacB': ['rr3']}, {'reacC': ['rr4'], 'reacD': ['rr5', 'rr6', 'rr7']}, ... ,{'reacX': ['rrN']}]
     '''
-    cpds = extracted_data[cpds_columnname]
-    extracted_data['compound_mols'] = cpds.map(Chem.MolFromSmiles)
-    extracted_data.dropna(subset=['compound_mols'], inplace=True)
-    extracted_data.reset_index(drop=True, inplace=True)
-    mols = extracted_data['compound_mols']
+    if canonicalize_cpds:
+        extracted_data['compound_mols'] = extracted_data[cpds_columnname].map(Chem.MolFromSmiles)
+        extracted_data.dropna(subset=['compound_mols'], inplace=True)
+        extracted_data.reset_index(drop=True, inplace=True)
+        mols = extracted_data['compound_mols']
+        cpds = mols.map(Chem.MolToSmiles)
+    else:
+        cpds = extracted_data[cpds_columnname]
+        extracted_data['compound_mols'] = cpds.map(Chem.MolFromSmiles)
+        extracted_data.dropna(subset=['compound_mols'], inplace=True)
+        extracted_data.reset_index(drop=True, inplace=True)
+        mols = extracted_data['compound_mols']
     if narrow_down_database:
         extracted_data['heavy_atoms_num'] = mols.map(lambda mol: mol.GetNumHeavyAtoms())
     result = list()
@@ -452,7 +460,7 @@ def caluculate_AAscore(input_cpd, model_path, extracted_data, cpds_columnname, u
     reactant_with_cr = extract_candidate_reactants_from_cpds(extracted_data,
                                                              cpds_columnname=cpds_columnname,
                                                              smallest_reactant_with_rc=curated_smallest_reactant_with_rc,
-                                                             only_rc=False, only_similarity=False, rc_and_similarity=True, similarity_threshold=0.4, match_rc_num_in_reactant=True, narrow_down_database=True)
+                                                             only_rc=False, only_similarity=False, rc_and_similarity=True, similarity_threshold=0.4, match_rc_num_in_reactant=True, narrow_down_database=True, canonicalize_cpds=True)
     print('Extraction time: ', time.time() - extract_start)
     reactant_with_cr = [remove_original_reactant_from_reac_with_rr(reac_with_rr) for reac_with_rr in reactant_with_cr]
     # If there are multiple reactants with the lowest number of heavy atoms, use the one with the highest number of extracted compounds.
