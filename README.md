@@ -19,6 +19,7 @@ save_path       = 'path/to/save_directory/generated_analogs.tsv'
 extracted_data  = pd.read_table(cpds_data_path)
 caluculate_AAscore(input_cpd, model_path, extracted_data, cpds_columnname, used_reactants_num=7, save_analogs=True, save_path=save_path)
 ~~~
+The template_extractor.py is a file for identifying the reaction center, and modifications have been made to the original [RDChiral](https://github.com/connorcoley/rdchiral). If you want to change parameters such as the radius of the reaction center, please modify the extract_from_reaction function within this file.
 
 ## Reference
 Takato Ue and Tomoyuki Miyao., Analog Accessibility Score (AAscore) for Rational Compound Selection, URL_to_paper
