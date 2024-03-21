@@ -1,3 +1,7 @@
+'''
+This file is a modified version of the original template_extractor.py, adapted for this study. 
+The original file can be found here: https://github.com/connorcoley/rdchiral/blob/master/rdchiral/template_extractor.py
+'''
 import re
 from numpy.random import shuffle
 from copy import deepcopy
