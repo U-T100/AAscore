@@ -1,7 +1,7 @@
 # AAscore
 The Analog Accessibility score (AAscore) is a score that represents the accessibility of analog compounds for a target compound.
 
-<img width="1228" alt="image" src="https://github.com/U-T100/AAscore/assets/48980320/e2019a50-3efd-42f1-a7c8-24e40f8f2ddd">
+<img width="948" alt="Proposed_method" src="https://github.com/U-T100/AAscore/assets/48980320/d97ebd11-a991-4911-97bd-9f9521985ddb">
 
 ## Installation
 To calculate the AAscore, a reaction prediction model (T5Chem) and rxnmapper are required. You can use AAscore_env.yml for setting up the environment, but if it doesn't work, please install the necessary libraries from the following link. If installing these via pip, Python 3.7 is highly recommended.
