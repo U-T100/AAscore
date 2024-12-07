@@ -22,4 +22,5 @@ caluculate_AAscore(input_cpd, model_path, extracted_data, cpds_columnname, used_
 The template_extractor.py is a file for identifying the reaction center, and modifications have been made to the original [RDChiral](https://github.com/connorcoley/rdchiral). If you want to change parameters such as the radius of the reaction center, please modify the extract_from_reaction function within this file.
 
 ## Reference
-Takato Ue and Tomoyuki Miyao., Analog Accessibility Score (AAscore) for Rational Compound Selection, URL_to_paper
+Ue, T.; Sato, A.; Miyao, T. Analog Accessibility Score (AAscore) for Rational Compound Selection. Journal of Chemical Information and Modeling.
+https://pubs.acs.org/doi/10.1021/acs.jcim.4c01691
